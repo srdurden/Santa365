@@ -729,10 +729,6 @@
 
     function header(){
       return `
-        <div class="top-status" aria-hidden="true">
-          <div>9:41</div>
-          <div class="status-icons"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="wifi"></span><span class="battery">88</span></div>
-        </div>
         <div class="game-head">
           <div>DÍA ${fmt(Math.min(state.day, MAX_DAYS))} / ${MAX_DAYS}</div>
           <div class="right">OPERACIÓN NAVIDAD</div>
@@ -747,18 +743,13 @@
       const hasSave = state.started;
       app.innerHTML = `
         <section class="screen">
-          <div class="top-status" aria-hidden="true">
-            <div>9:41</div>
-            <div class="status-icons"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="wifi"></span><span class="battery">88</span></div>
-          </div>
-          <div class="game-head"><div>NVL 1</div><div class="right">OPERACIÓN NAVIDAD</div></div>
+          <div class="game-head"><div>NIVEL 1</div><div class="right">OPERACIÓN NAVIDAD</div></div>
           <div class="thick-line"></div>
           <div class="title-spacer"></div>
           <div class="section-title">MISIÓN</div>
           <h1 class="title-big">2.000.000</h1>
           <div class="title-word">REGALOS</div>
           <div class="script note">antes de Navidad</div>
-          <p class="intro-copy">Santa empieza solo. Nivel 1. Sin duendes. Sin materiales. Tienes 365 días para fabricar un regalo para cada niño del mundo.</p>
           <div class="title-spacer"></div>
           <div class="bottom-area">
             <button class="pill" data-act="start">${hasSave ? 'CONTINUAR' : 'EMPEZAR'}</button>
@@ -867,10 +858,6 @@
       const missing = Math.max(0, TARGET - state.gifts);
       app.innerHTML = `
         <section class="screen">
-          <div class="top-status" aria-hidden="true">
-            <div>9:41</div>
-            <div class="status-icons"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="wifi"></span><span class="battery">88</span></div>
-          </div>
           <div class="game-head"><div>DÍA ${fmt(Math.min(finalResult?.day || state.day, MAX_DAYS))} / ${MAX_DAYS}</div><div class="right">OPERACIÓN NAVIDAD</div></div>
           <div class="thick-line"></div>
           <div class="title-spacer"></div>
