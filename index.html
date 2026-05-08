@@ -1,256 +1,139 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbfbfa">
   <title>Operación Navidad</title>
   <style>
     :root{
       --bg:#fbfbfa;
       --ink:#050505;
-      --soft:#dadada;
-      --muted:#666;
-      --shadow:0 14px 50px rgba(0,0,0,.06);
-      --safe-top:env(safe-area-inset-top, 0px);
-      --safe-bottom:env(safe-area-inset-bottom, 0px);
+      --soft:#d9d9d9;
+      --safe-top:env(safe-area-inset-top,0px);
+      --safe-bottom:env(safe-area-inset-bottom,0px);
     }
-
-    *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-
-    html,body{
-      margin:0;
-      width:100%;
-      min-height:100%;
-      background:var(--bg);
-      color:var(--ink);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overscroll-behavior:none;
-    }
-
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
     body{
       min-height:100svh;
       display:flex;
       justify-content:center;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(0,0,0,.035), transparent 38%),
-        linear-gradient(180deg, #fff 0%, #fafafa 100%);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at 50% 18%,rgba(0,0,0,.035),transparent 34%),linear-gradient(180deg,#fff 0%,#fafafa 100%);
+      overscroll-behavior:none;
     }
-
-    button{
-      font:inherit;
-      color:inherit;
-      border:0;
-      background:transparent;
-      cursor:pointer;
-    }
-
+    button{font:inherit;color:inherit;border:0;background:transparent;cursor:pointer}
     .app{
-      width:min(100vw, 520px);
+      width:min(100vw,520px);
       min-height:100svh;
-      position:relative;
-      padding:calc(14px + var(--safe-top)) clamp(18px, 5vw, 28px) calc(14px + var(--safe-bottom));
+      padding:calc(14px + var(--safe-top)) clamp(18px,5vw,28px) calc(14px + var(--safe-bottom));
       display:flex;
       flex-direction:column;
       overflow:hidden;
     }
-
     .screen{
       min-height:calc(100svh - var(--safe-top) - var(--safe-bottom) - 28px);
       display:flex;
       flex-direction:column;
-      animation: screenIn .34s cubic-bezier(.2,.8,.2,1);
+      animation:screenIn .34s cubic-bezier(.2,.8,.2,1);
     }
-
     @keyframes screenIn{
-      from{ opacity:0; transform:translateY(10px); filter:blur(2px); }
-      to{ opacity:1; transform:translateY(0); filter:blur(0); }
+      from{opacity:0;transform:translateY(10px);filter:blur(2px)}
+      to{opacity:1;transform:translateY(0);filter:blur(0)}
     }
-
-    .top-status{
-      height:28px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-weight:900;
-      font-size:18px;
-      letter-spacing:.01em;
-      margin-bottom:20px;
-    }
-
-    .status-icons{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      font-size:13px;
-      font-weight:900;
-    }
-
-    .bars{
-      display:flex;
-      align-items:flex-end;
-      gap:2px;
-      height:15px;
-    }
-    .bars i{ display:block; width:4px; background:#000; border-radius:2px; }
-    .bars i:nth-child(1){height:6px}.bars i:nth-child(2){height:9px}.bars i:nth-child(3){height:12px}.bars i:nth-child(4){height:15px}
-
-    .wifi{
-      width:18px;height:13px;position:relative;display:inline-block;
-      border-top:4px solid #000;border-radius:18px 18px 0 0;
-    }
-    .wifi:before{content:"";position:absolute;left:4px;top:3px;width:10px;height:7px;border-top:4px solid #000;border-radius:12px 12px 0 0;}
-    .wifi:after{content:"";position:absolute;left:8px;top:10px;width:4px;height:4px;background:#000;border-radius:50%;}
-
-    .battery{
-      background:#000;color:#fff;border-radius:5px;padding:1px 6px;font-size:12px;line-height:17px;min-width:31px;text-align:center;position:relative;
-    }
-    .battery:after{content:"";position:absolute;right:-3px;top:6px;width:2px;height:7px;background:#000;border-radius:0 2px 2px 0;}
-
-    .game-head{
+    .head{
       display:grid;
-      grid-template-columns:1fr auto;
+      grid-template-columns:auto 1fr;
       gap:12px;
       align-items:end;
-      font-size:clamp(11px, 2.7vw, 14px);
+      font-size:clamp(10px,2.55vw,14px);
       font-weight:950;
-      letter-spacing:.36em;
+      letter-spacing:.28em;
       text-transform:uppercase;
       white-space:nowrap;
     }
-
-    .game-head .right{
+    .head .right{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
       text-align:right;
-      letter-spacing:.34em;
+      letter-spacing:.1em;
     }
-
-    .thick-line{
-      height:4px;
-      background:#000;
-      width:100%;
-      margin:9px 0 18px;
-    }
-
-    .progress-label{
-      text-align:center;
-      font-size:clamp(11px, 2.8vw, 14px);
-      font-weight:950;
-      letter-spacing:.34em;
-      white-space:nowrap;
-      margin-bottom:16px;
-    }
-
-    .progress-track{
-      width:100%;
-      height:4px;
-      background:#000;
-      position:relative;
-      margin-bottom:clamp(34px, 6.4svh, 58px);
-      transform:translateZ(0);
-    }
-    .progress-fill{
-      height:4px;
-      background:#000;
-      width:0%;
-      min-width:26px;
-      border-radius:999px;
-      position:absolute;
-      left:0;
-      top:0;
-      box-shadow:0 0 0 0 #000;
-    }
-    .progress-fill:after{
-      content:"";
-      position:absolute;
-      right:-3px;top:-2px;
-      width:8px;height:8px;background:#000;border-radius:50%;
-    }
-
+    .head.title-head .right{letter-spacing:.28em}
+    .top-rule{height:4px;background:#000;width:100%;margin:9px 0 clamp(20px,5svh,38px)}
     .section-title{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:22px;
-      margin:0 0 12px;
-      font-size:clamp(12px, 3vw, 15px);
-      letter-spacing:.55em;
+      gap:18px;
+      margin:0 0 14px;
+      font-size:clamp(12px,3vw,15px);
+      letter-spacing:.48em;
       font-weight:950;
       text-transform:uppercase;
       white-space:nowrap;
     }
-    .section-title:before,.section-title:after{
-      content:"";
-      height:3px;
-      background:#000;
-      width:min(22vw,120px);
-      flex:0 1 auto;
-    }
-
+    .section-title:before,.section-title:after{content:"";height:3px;background:#000;width:min(21vw,120px);flex:0 1 auto}
     .script{
-      font-family: Georgia, "Times New Roman", serif;
+      font-family:Georgia,"Times New Roman",serif;
       font-style:italic;
       font-weight:400;
       letter-spacing:-.045em;
       text-align:center;
-      line-height:.95;
+      line-height:.98;
     }
-
-    .hero-number{
-      font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-weight:950;
+    .spacer{flex:1;min-height:38px}
+    .big-word,.hero-number,.hero-word,.level-number{
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
       text-align:center;
-      font-size:clamp(82px, 23vw, 128px);
-      line-height:.79;
-      letter-spacing:-.045em;
+      letter-spacing:-.052em;
       margin:0;
     }
-
+    .big-word{font-size:clamp(82px,24vw,132px);line-height:.78}
+    .hero-number{font-size:clamp(84px,24vw,132px);line-height:.78}
+    .hero-word{
+      font-size:clamp(44px,13vw,68px);
+      line-height:.85;
+      text-transform:uppercase;
+      letter-spacing:-.025em;
+      margin-top:9px;
+    }
     .hero-label{
-      font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(27px, 7.5vw, 41px);
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(27px,7.2vw,42px);
       text-align:center;
       text-transform:uppercase;
       line-height:.9;
       margin:8px 0 0;
       letter-spacing:-.02em;
     }
-
-    .metric-line{
-      height:2px;background:#000;width:70%;margin:22px auto 22px;
-    }
-
-    .mid-strong{
-      font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
+    .metric-line{height:2px;background:#000;width:70%;margin:clamp(18px,3.8svh,26px) auto}
+    .last-day{
+      width:100%;
+      margin:0 auto clamp(20px,4.2svh,34px);
+      border-top:2px solid #000;
+      border-bottom:2px solid #000;
+      padding:10px 0 11px;
       text-align:center;
-      font-size:clamp(30px, 8vw, 43px);
-      line-height:1;
-      margin:0;
+      animation:lastIn .42s cubic-bezier(.2,.8,.2,1) both;
+    }
+    @keyframes lastIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+    .last-day .eyebrow{
+      font-size:clamp(10px,2.7vw,12px);
+      font-weight:950;
+      letter-spacing:.38em;
       text-transform:uppercase;
-      letter-spacing:.01em;
+      margin-bottom:6px;
     }
-
-    .rows{
-      width:78%;
-      margin:0 auto;
-      text-align:center;
-      font-size:clamp(15px, 4vw, 19px);
-      line-height:1.15;
+    .last-day .summary{
+      font-size:clamp(13px,3.45vw,17px);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      line-height:1.25;
     }
-    .rows .row{
-      border-bottom:1.5px solid #000;
-      padding:11px 0;
-      font-weight:800;
-      letter-spacing:.03em;
-    }
-    .rows .row:first-child{border-top:1.5px solid #000;}
-    .rows .muted{font-weight:500;letter-spacing:.1em;}
-
-    .bottom-area{
-      margin-top:auto;
-      padding-top:18px;
-      border-top:1px solid #d7d7d7;
-    }
-
+    .bottom-area{margin-top:auto;padding-top:18px;border-top:1px solid var(--soft)}
     .pill{
       width:100%;
       min-height:64px;
@@ -262,169 +145,16 @@
       text-align:center;
       padding:12px 18px;
       background:#fff;
-      font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(27px, 7.5vw, 42px);
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(27px,7.5vw,42px);
       line-height:.95;
       text-transform:uppercase;
       letter-spacing:.01em;
-      box-shadow:none;
-      transition:transform .16s ease, background .16s ease, color .16s ease;
+      transition:transform .16s ease,background .16s ease,color .16s ease;
     }
-    .pill:active{ transform:scale(.975); }
-    .pill.black{ background:#000;color:#fff; }
-    .pill.small-text{font-size:clamp(18px, 5.4vw, 30px);letter-spacing:.03em;}
-    .pill.mini{min-height:52px;font-size:clamp(18px,5vw,28px);border-width:3px;}
-    .pill.disabled{opacity:.28;pointer-events:none;}
-
-    .note{
-      margin:12px 0 0;
-      color:#111;
-      font-size:clamp(18px, 5vw, 26px);
-    }
-
-    .title-spacer{ flex:1; min-height:52px; }
-    .title-big{
-      font-family:Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(84px, 25vw, 134px);
-      line-height:.78;
-      text-align:center;
-      letter-spacing:-.05em;
-      margin:0;
-    }
-    .title-word{
-      font-family:Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(45px, 13vw, 68px);
-      line-height:.84;
-      text-align:center;
-      text-transform:uppercase;
-      margin:8px 0 0;
-    }
-    .intro-copy{
-      margin:28px auto 0;
-      max-width:320px;
-      text-align:center;
-      font-size:clamp(15px, 4vw, 18px);
-      font-weight:760;
-      line-height:1.35;
-      letter-spacing:.02em;
-    }
-
-    .action-list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top:12px;
-    }
-    .plan-subtitle{
-      font-size:clamp(33px, 9.8vw, 55px);
-      margin:2px 0 34px;
-    }
-    .group-heading{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-      font-size:clamp(13px, 3.4vw, 17px);
-      letter-spacing:.48em;
-      text-transform:uppercase;
-      font-weight:950;
-      white-space:nowrap;
-      margin:0 0 4px;
-    }
-    .group-heading:before,.group-heading:after{content:"";height:3px;background:#000;flex:1;max-width:130px;}
-
-    .equipment{
-      margin-top:18px;
-    }
-    .equipment .rows{
-      width:100%;
-      font-size:clamp(12px, 3.45vw, 16px);
-    }
-    .equipment .row{
-      padding:9px 0;
-      white-space:nowrap;
-    }
-
-    .forecast{
-      margin:11px 0 0;
-      text-align:center;
-      font-size:clamp(11px,3vw,14px);
-      letter-spacing:.18em;
-      font-weight:900;
-      text-transform:uppercase;
-    }
-
-    .compact-bottom{
-      padding-top:14px;
-      margin-top:auto;
-    }
-    .compact-bottom .pill{min-height:60px;}
-    .compact-bottom .note{font-size:clamp(17px,4.8vw,24px);}
-
-    .summary-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin:8px 0 16px;
-    }
-    .summary-card{
-      border-top:2px solid #000;
-      border-bottom:2px solid #000;
-      padding:14px 0;
-      text-align:center;
-    }
-    .summary-card .n{
-      font-family:Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(42px, 12vw, 70px);
-      line-height:.85;
-      letter-spacing:-.03em;
-    }
-    .summary-card .l{
-      margin-top:6px;
-      font-size:clamp(10px,2.8vw,13px);
-      font-weight:950;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      line-height:1.25;
-    }
-
-    .log-box{
-      margin:8px auto 0;
-      width:88%;
-      text-align:center;
-      border-top:1.5px solid #000;
-      border-bottom:1.5px solid #000;
-      padding:10px 0;
-      font-size:clamp(13px,3.6vw,17px);
-      line-height:1.35;
-      font-weight:700;
-    }
-    .log-box p{margin:7px 0;}
-
-    .unlock{
-      margin:15px auto 0;
-      width:88%;
-      text-align:center;
-      padding:12px 10px;
-      border:3px solid #000;
-      border-radius:22px;
-      background:#fff;
-    }
-    .unlock .eyebrow{
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.42em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-    }
-    .unlock .name{
-      font-family:Impact, Haettenschweiler, "Arial Black", sans-serif;
-      font-size:clamp(25px,7vw,37px);
-      line-height:.94;
-      text-transform:uppercase;
-    }
-
-    .tiny-actions{
+    .pill:active{transform:scale(.976)}
+    .note{margin:12px 0 0;color:#111;font-size:clamp(18px,5vw,26px)}
+    .footer-actions{
       display:flex;
       justify-content:center;
       gap:18px;
@@ -434,9 +164,254 @@
       font-weight:950;
       text-transform:uppercase;
     }
-    .tiny-actions button{border-bottom:2px solid #000;padding-bottom:4px;}
-
-    .final-copy{
+    .footer-actions button{border-bottom:2px solid #000;padding-bottom:4px}
+    .planning-meta{
+      margin:-6px auto 20px;
+      width:100%;
+      text-align:center;
+      font-size:clamp(13px,3.5vw,18px);
+      font-weight:950;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .dropdown{position:relative;margin:4px 0 14px;z-index:5}
+    .select-face{
+      width:100%;
+      min-height:82px;
+      border:3.5px solid #000;
+      border-radius:34px;
+      background:#fff;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:12px;
+      text-align:left;
+      padding:15px 18px 14px 20px;
+      transition:transform .16s ease;
+    }
+    .select-face:active{transform:scale(.985)}
+    .select-face.static{grid-template-columns:1fr}
+    .selected-label{
+      display:block;
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(25px,7vw,40px);
+      line-height:.93;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+    }
+    .chevron{
+      width:30px;
+      height:30px;
+      position:relative;
+      flex:0 0 30px;
+      font-size:0;
+      line-height:0;
+      transform:none;
+      transition:transform .22s ease;
+    }
+    .chevron:before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:12px;
+      height:12px;
+      border-right:4px solid #000;
+      border-bottom:4px solid #000;
+      transform:translate(-50%,-68%) rotate(45deg);
+    }
+    .dropdown.open .chevron{transform:rotate(180deg)}
+    .options{
+      position:absolute;
+      left:0;
+      right:0;
+      top:calc(100% + 10px);
+      background:var(--bg);
+      border:3px solid #000;
+      border-radius:28px;
+      padding:8px;
+      display:none;
+      box-shadow:0 20px 60px rgba(0,0,0,.08);
+      max-height:min(52svh,420px);
+      overflow:auto;
+    }
+    .dropdown.open .options{display:block}
+    .option{
+      width:100%;
+      text-align:left;
+      border-radius:20px;
+      padding:13px 14px;
+      font-weight:950;
+      font-size:clamp(14px,3.8vw,18px);
+      line-height:1.05;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      border-bottom:1.5px solid #000;
+    }
+    .option:last-child{border-bottom:0}
+    .option.selected{background:#000;color:#fff}
+    .option.disabled{opacity:.28;pointer-events:none}
+    .forecast-card{
+      border-top:2px solid #000;
+      border-bottom:2px solid #000;
+      padding:13px 0;
+      margin:16px auto 0;
+      width:86%;
+      text-align:center;
+    }
+    .forecast-card .big{
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(30px,8vw,44px);
+      line-height:.9;
+      text-transform:uppercase;
+    }
+    .forecast-card .title{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      margin:0 0 10px;
+      font-size:clamp(10px,2.75vw,13px);
+      font-weight:950;
+      letter-spacing:.38em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .forecast-card .title:before,.forecast-card .title:after{
+      content:"";
+      height:2px;
+      background:#000;
+      width:min(18vw,95px);
+      flex:0 1 auto;
+    }
+    .forecast-card .small{
+      margin-top:7px;
+      font-size:clamp(11px,3vw,14px);
+      font-weight:950;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
+    .stat-row{
+      width:100%;
+      margin:clamp(18px,4svh,30px) auto 0;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      align-items:stretch;
+      border-top:2px solid #000;
+      border-bottom:2px solid #000;
+    }
+    .stat-cell{
+      min-width:0;
+      padding:clamp(10px,2.4svh,16px) 7px;
+      text-align:center;
+      border-right:1.5px solid #000;
+    }
+    .stat-cell:last-child{border-right:0}
+    .stat-number{
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(27px,8vw,42px);
+      line-height:.86;
+      letter-spacing:-.04em;
+      white-space:nowrap;
+    }
+    .stat-label{
+      margin-top:7px;
+      font-size:clamp(8px,2.35vw,11px);
+      font-weight:950;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      line-height:1.18;
+    }
+    .level-screen{
+      position:relative;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height:0;
+      overflow:hidden;
+    }
+    .level-title{
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      text-align:center;
+      font-size:clamp(57px,17vw,92px);
+      line-height:.82;
+      letter-spacing:-.04em;
+      margin:0;
+      text-transform:uppercase;
+      animation:pop .72s cubic-bezier(.16,1,.3,1) both;
+    }
+    .level-frame{
+      margin:0 auto 12px;
+      text-align:center;
+      border-top:4px solid #000;
+      border-bottom:4px solid #000;
+      padding:16px 0 12px;
+      width:82%;
+      animation:frame .9s cubic-bezier(.16,1,.3,1) both;
+    }
+    .level-eyebrow{
+      display:block;
+      font-weight:950;
+      letter-spacing:.44em;
+      font-size:clamp(12px,3vw,15px);
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+    .level-number{
+      display:block;
+      font-size:clamp(104px,31vw,162px);
+      line-height:.76;
+      animation:pulse 1.2s cubic-bezier(.16,1,.3,1) both;
+    }
+    .ability-card{
+      margin:16px auto 0;
+      width:88%;
+      text-align:center;
+      padding:15px 12px;
+      border:3px solid #000;
+      border-radius:26px;
+      background:#fff;
+      animation:card .64s .28s cubic-bezier(.16,1,.3,1) both;
+    }
+    .ability-card .eyebrow{
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .ability-card .name{
+      font-family:Impact,Haettenschweiler,"Arial Black",sans-serif;
+      font-size:clamp(25px,7.4vw,40px);
+      line-height:.9;
+      text-transform:uppercase;
+    }
+    .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .confetti i{
+      position:absolute;
+      top:-20px;
+      left:var(--x);
+      width:var(--w);
+      height:var(--h);
+      background:#000;
+      opacity:var(--o);
+      border-radius:2px;
+      animation:fall var(--d) cubic-bezier(.2,.8,.2,1) var(--delay) both;
+    }
+    .confetti i:nth-child(3n){background:#fff;border:2px solid #000}
+    .confetti i:nth-child(4n){width:3px;height:18px;border-radius:999px}
+    @keyframes fall{
+      0%{transform:translate3d(0,-30px,0) rotate(0deg);opacity:0}
+      10%{opacity:var(--o)}
+      100%{transform:translate3d(var(--dx),105svh,0) rotate(720deg);opacity:0}
+    }
+    @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.94);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+    @keyframes pulse{0%{transform:scale(.72);opacity:0;filter:blur(5px)}55%{transform:scale(1.09);opacity:1;filter:blur(0)}100%{transform:scale(1)}}
+    @keyframes frame{from{clip-path:inset(0 50% 0 50%);opacity:.2}to{clip-path:inset(0 0 0 0);opacity:1}}
+    @keyframes card{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .final-text{
       margin:22px auto 0;
       width:86%;
       text-align:center;
@@ -444,475 +419,422 @@
       line-height:1.38;
       font-size:clamp(15px,4vw,18px);
     }
-
-    .sr-only{
-      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    @media(max-height:750px){
+      .app{padding-top:14px}
+      .top-rule{margin-bottom:20px}
+      .hero-number{font-size:clamp(70px,21vw,112px)}
+      .metric-line{margin:16px auto}
+      .pill{min-height:56px}
+      .select-face{min-height:72px}
+      .last-day{margin-bottom:18px;padding:9px 0}
     }
-
-    @media (max-height: 750px){
-      .top-status{display:none;}
-      .app{padding-top:14px;}
-      .progress-track{margin-bottom:24px;}
-      .hero-number{font-size:clamp(70px, 21vw, 112px);}
-      .metric-line{margin:16px auto;}
-      .rows .row{padding:8px 0;}
-      .pill{min-height:56px;}
-      .plan-subtitle{font-size:clamp(28px, 8vw, 42px); margin-bottom:22px;}
-      .action-list{gap:8px;}
-      .equipment{margin-top:12px;}
-    }
-
-    @media (max-height: 680px){
-      .progress-label{margin-bottom:9px;}
-      .progress-track{margin-bottom:16px;}
-      .section-title{margin-bottom:8px;}
-      .hero-number{font-size:68px;}
-      .hero-label{font-size:25px;}
-      .metric-line{margin:13px auto;}
-      .mid-strong{font-size:28px;}
-      .group-heading{margin-bottom:2px;}
-      .pill.mini{min-height:47px;font-size:20px;}
-      .equipment .row{padding:6px 0;font-size:12px;}
-      .forecast{display:none;}
-      .note{font-size:18px;}
+    @media(max-height:680px){
+      .section-title{margin-bottom:9px}
+      .hero-number{font-size:66px}
+      .hero-label{font-size:25px}
+      .metric-line{margin:12px auto}
+      .selected-label{font-size:23px}
+      .forecast-card{padding:10px 0;margin-top:12px}
+      .forecast-card .big{font-size:28px}
+      .stat-row{margin-top:12px}
+      .stat-cell{padding:9px 5px}
+      .stat-number{font-size:25px}
+      .bottom-area{padding-top:13px}
     }
   </style>
 </head>
 <body>
-  <main class="app" id="app" aria-live="polite"></main>
-
+  <main id="app" class="app"></main>
   <script>
-  (() => {
-    'use strict';
-
-    const TARGET = 2000000;
-    const MAX_DAYS = 365;
-    const SAVE_KEY = 'operacion-navidad-save-v1';
-
-    const unlockNames = {
-      2: 'RECOGER MATERIALES',
-      3: 'FABRICAR REGALOS',
-      4: 'CONTRATAR DUENDE FABRICANTE',
-      5: 'CONTRATAR DUENDE RECOLECTOR',
-      6: 'FORMAR FABRICANTES',
-      7: 'FORMAR RECOLECTORES'
+  (()=>{
+    const KEY='operacion_navidad_v5';
+    const MAX_DAYS=365;
+    const TARGET=2000000;
+    const unlocks={
+      2:'RECOGER MATERIALES',
+      3:'FABRICAR REGALOS',
+      4:'CONTRATAR DUENDE FABRICANTE',
+      5:'CONTRATAR DUENDE RECOLECTOR',
+      6:'FORMAR FABRICANTES',
+      7:'FORMAR RECOLECTORES'
     };
+    const app=document.getElementById('app');
 
-    const app = document.getElementById('app');
+    const fresh=()=>({
+      started:false,
+      day:1,
+      gifts:0,
+      materials:0,
+      santaLevel:1,
+      makerCount:0,
+      makerLevel:1,
+      collectorCount:0,
+      collectorLevel:1,
+      lastAction:'study',
+      lastResult:null,
+      finished:null
+    });
 
-    let state = load() || freshState();
-    let view = state.started ? 'dashboard' : 'title';
-    let selectedAction = firstAvailableAction(state);
-    let lastResult = null;
-    let finalResult = null;
-
-    function freshState(){
-      return {
-        started:false,
-        day:1,
-        santaLevel:1,
-        materials:0,
-        gifts:0,
-        makerCount:0,
-        makerLevel:1,
-        collectorCount:0,
-        collectorLevel:1,
-        history:[]
-      };
-    }
+    let state=load();
+    let view=state.started ? (state.finished ? 'final' : 'dashboard') : 'title';
+    let selectedAction=defaultAction(state);
+    let dropdownOpen=false;
 
     function load(){
       try{
-        const raw = localStorage.getItem(SAVE_KEY);
-        if(!raw) return null;
-        const parsed = JSON.parse(raw);
-        if(!parsed || typeof parsed !== 'object') return null;
-        return { ...freshState(), ...parsed };
-      }catch(e){ return null; }
+        const raw=localStorage.getItem(KEY);
+        return raw ? {...fresh(),...JSON.parse(raw)} : fresh();
+      }catch(e){ return fresh(); }
     }
-
     function save(){
-      try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){}
+      try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){}
     }
-
-    function fmt(n){
-      return Math.floor(n).toLocaleString('es-ES');
-    }
-
-    function ratio(){
-      return Math.max(0, Math.min(100, state.gifts / TARGET * 100));
-    }
-
-    function daysPlayed(){
-      return Math.max(0, state.day - 1);
-    }
-
-    function currentPace(){
-      const played = daysPlayed();
-      if(played <= 0) return 0;
-      return Math.round(state.gifts / played);
-    }
+    function fmt(n){ return (Number(n)||0).toLocaleString('es-ES'); }
+    function currentPace(){ return state.day<=1 ? 0 : Math.round(state.gifts/(state.day-1)); }
 
     function availableActions(s){
-      const list = [{id:'study', label:'ESTUDIAR'}];
-      if(s.santaLevel >= 2) list.push({id:'collect', label:`RECOGER MATERIALES  +${fmt(s.santaLevel * 5)}`});
-      if(s.santaLevel >= 3) list.push({id:'craft', label:`FABRICAR REGALOS  +${fmt(s.santaLevel)}  ·  −${fmt(s.santaLevel)} MAT.`});
-      if(s.santaLevel >= 4) list.push({id:'hireMaker', label:'CONTRATAR DUENDE FABRICANTE'});
-      if(s.santaLevel >= 5) list.push({id:'hireCollector', label:'CONTRATAR DUENDE RECOLECTOR'});
-      if(s.santaLevel >= 6) list.push({id:'trainMakers', label:'FORMAR FABRICANTES', disabled:s.makerCount <= 0});
-      if(s.santaLevel >= 7) list.push({id:'trainCollectors', label:'FORMAR RECOLECTORES', disabled:s.collectorCount <= 0});
+      const list=[{id:'study',label:'ESTUDIAR'}];
+      if(s.santaLevel>=2) list.push({id:'collect',label:`RECOGER MATERIALES  +${fmt(s.santaLevel*5)}`});
+      if(s.santaLevel>=3) list.push({id:'craft',label:`FABRICAR REGALOS  +${fmt(s.santaLevel)}  ·  −${fmt(s.santaLevel)} MAT.`,disabled:s.materials<s.santaLevel});
+      if(s.santaLevel>=4) list.push({id:'hireMaker',label:'CONTRATAR DUENDE FABRICANTE'});
+      if(s.santaLevel>=5) list.push({id:'hireCollector',label:'CONTRATAR DUENDE RECOLECTOR'});
+      if(s.santaLevel>=6) list.push({id:'trainMakers',label:'FORMAR FABRICANTES',disabled:s.makerCount<=0});
+      if(s.santaLevel>=7) list.push({id:'trainCollectors',label:'FORMAR RECOLECTORES',disabled:s.collectorCount<=0});
       return list;
     }
-
-    function firstAvailableAction(s){
-      const a = availableActions(s).find(x => !x.disabled);
-      return a ? a.id : 'study';
-    }
-
+    function firstAction(s){ return availableActions(s).find(a=>!a.disabled)?.id || 'study'; }
+    function defaultAction(s){ return availableActions(s).some(a=>a.id===s.lastAction&&!a.disabled) ? s.lastAction : firstAction(s); }
     function nextUnlockFor(s){
-      for(let lvl = s.santaLevel + 1; lvl <= 7; lvl++){
-        if(unlockNames[lvl]) return {level:lvl, name:unlockNames[lvl]};
-      }
-      return null;
+      const level=s.santaLevel+1;
+      return unlocks[level] ? {level,name:unlocks[level]} : null;
     }
-
-    function actionName(id){
-      return {
-        study:'ESTUDIAR',
-        collect:'RECOGER MATERIALES',
-        craft:'FABRICAR REGALOS',
-        hireMaker:'CONTRATAR DUENDE FABRICANTE',
-        hireCollector:'CONTRATAR DUENDE RECOLECTOR',
-        trainMakers:'FORMAR FABRICANTES',
-        trainCollectors:'FORMAR RECOLECTORES'
-      }[id] || 'ACCIÓN';
-    }
-
     function previewDay(actionId){
-      let materials = state.materials;
-      let gifts = state.gifts;
-      let santaMaterialGain = 0;
-      let collectorGain = state.collectorCount * state.collectorLevel * 5;
-      let santaWanted = 0;
-      let makerWanted = state.makerCount * state.makerLevel;
-      let santaMade = 0;
-      let makersMade = 0;
-      let materialsUsed = 0;
-      let pending = [];
-      let newSantaLevel = state.santaLevel;
-      let newMakerCount = state.makerCount;
-      let newMakerLevel = state.makerLevel;
-      let newCollectorCount = state.collectorCount;
-      let newCollectorLevel = state.collectorLevel;
-      let unlock = null;
-
-      if(actionId === 'collect') santaMaterialGain = state.santaLevel * 5;
-      if(actionId === 'craft') santaWanted = state.santaLevel;
-
-      materials += santaMaterialGain + collectorGain;
-
-      const totalWanted = santaWanted + makerWanted;
-      const totalMade = Math.min(materials, totalWanted);
-      if(totalMade > 0){
-        santaMade = Math.min(santaWanted, totalMade);
-        makersMade = totalMade - santaMade;
-      }
-      materials -= totalMade;
-      gifts += totalMade;
-      materialsUsed = totalMade;
-
-      if(actionId === 'study'){
-        newSantaLevel += 1;
-        pending.push(`Santa sube a NVL. ${newSantaLevel}`);
-        if(unlockNames[newSantaLevel]) unlock = unlockNames[newSantaLevel];
-      }
-      if(actionId === 'hireMaker'){
-        newMakerCount += 1;
-        pending.push('Nuevo duende fabricante contratado');
-      }
-      if(actionId === 'hireCollector'){
-        newCollectorCount += 1;
-        pending.push('Nuevo duende recolector contratado');
-      }
-      if(actionId === 'trainMakers' && state.makerCount > 0){
-        newMakerLevel += 1;
-        pending.push(`Fabricantes suben a NVL. ${newMakerLevel}`);
-      }
-      if(actionId === 'trainCollectors' && state.collectorCount > 0){
-        newCollectorLevel += 1;
-        pending.push(`Recolectores suben a NVL. ${newCollectorLevel}`);
-      }
-
-      return {
-        actionId,
-        actionLabel: actionName(actionId),
-        startDay: state.day,
-        startMaterials: state.materials,
-        startGifts: state.gifts,
-        santaMaterialGain,
-        collectorGain,
-        materialGain: santaMaterialGain + collectorGain,
-        santaWanted,
-        makerWanted,
-        santaMade,
-        makersMade,
-        giftsMade: totalMade,
-        materialsUsed,
-        materialsEnd: materials,
-        giftsEnd: gifts,
-        pending,
-        unlock,
-        newSantaLevel,
-        newMakerCount,
-        newMakerLevel,
-        newCollectorCount,
-        newCollectorLevel,
-        limitedByMaterials: totalWanted > totalMade
-      };
+      let materialGain=state.collectorCount*state.collectorLevel*5;
+      let requestedGifts=state.makerCount*state.makerLevel;
+      if(actionId==='collect') materialGain+=state.santaLevel*5;
+      if(actionId==='craft') requestedGifts+=state.santaLevel;
+      const giftsMade=Math.min(requestedGifts,state.materials+materialGain);
+      const netMaterials=materialGain-giftsMade;
+      return {materialGain,requestedGifts,giftsMade,netMaterials};
     }
+    function studyReward(){ return nextUnlockFor(state)?.name || 'MÁS POTENCIA'; }
 
-    function resolveDay(){
-      const result = previewDay(selectedAction);
-      state.materials = result.materialsEnd;
-      state.gifts = result.giftsEnd;
-      state.santaLevel = result.newSantaLevel;
-      state.makerCount = result.newMakerCount;
-      state.makerLevel = result.newMakerLevel;
-      state.collectorCount = result.newCollectorCount;
-      state.collectorLevel = result.newCollectorLevel;
-      state.history.push({ day:result.startDay, gifts:result.giftsMade, materials:result.materialGain, action:result.actionId });
-      if(state.history.length > 12) state.history.shift();
-
-      lastResult = result;
-
-      if(state.gifts >= TARGET){
-        finalResult = { won:true, day:result.startDay };
-        save();
-        view = 'final';
-        render();
-        return;
-      }
-      if(result.startDay >= MAX_DAYS){
-        finalResult = { won:false, day:result.startDay };
-        save();
-        view = 'final';
-        render();
-        return;
-      }
-
-      state.day += 1;
-      selectedAction = firstAvailableAction(state);
-      save();
-      view = 'summary';
-      render();
+    function header(day=state.day){
+      return `<div class="head"><div>DÍA ${fmt(Math.min(day,MAX_DAYS))} / ${MAX_DAYS}</div><div class="right">REGALOS ${fmt(state.gifts)} / ${fmt(TARGET)}</div></div><div class="top-rule"></div>`;
     }
-
-    function startGame(){
-      state.started = true;
-      save();
-      selectedAction = firstAvailableAction(state);
-      view = 'dashboard';
-      render();
-    }
-
-    function hardReset(){
-      if(confirm('¿Reiniciar la partida?')){
-        localStorage.removeItem(SAVE_KEY);
-        state = freshState();
-        selectedAction = firstAvailableAction(state);
-        lastResult = null;
-        finalResult = null;
-        view = 'title';
-        render();
-      }
-    }
-
-    function header(){
-      return `
-        <div class="game-head">
-          <div>DÍA ${fmt(Math.min(state.day, MAX_DAYS))} / ${MAX_DAYS}</div>
-          <div class="right">OPERACIÓN NAVIDAD</div>
-        </div>
-        <div class="thick-line"></div>
-        <div class="progress-label">REGALOS ${fmt(state.gifts)} / ${fmt(TARGET)}</div>
-        <div class="progress-track" aria-hidden="true"><div class="progress-fill" style="width:${ratio()}%"></div></div>
-      `;
+    function footer(extra=''){
+      return `<div class="bottom-area">${extra}<div class="footer-actions"><button data-act="reset">REINICIAR</button></div></div>`;
     }
 
     function renderTitle(){
-      const hasSave = state.started;
-      app.innerHTML = `
+      app.innerHTML=`
         <section class="screen">
-          <div class="game-head"><div>NIVEL 1</div><div class="right">OPERACIÓN NAVIDAD</div></div>
-          <div class="thick-line"></div>
-          <div class="title-spacer"></div>
+          <div class="head title-head"><div>NIVEL 1</div><div class="right">OPERACIÓN NAVIDAD</div></div>
+          <div class="top-rule"></div>
+          <div class="spacer"></div>
           <div class="section-title">MISIÓN</div>
-          <h1 class="title-big">2.000.000</h1>
-          <div class="title-word">REGALOS</div>
+          <h1 class="big-word">2.000.000</h1>
+          <div class="hero-word">REGALOS</div>
           <div class="script note">antes de Navidad</div>
-          <div class="title-spacer"></div>
-          <div class="bottom-area">
-            <button class="pill" data-act="start">${hasSave ? 'CONTINUAR' : 'EMPEZAR'}</button>
-            <div class="tiny-actions"><button data-act="reset">REINICIAR</button></div>
-          </div>
-        </section>
-      `;
+          <div class="spacer"></div>
+          ${footer(`<button class="pill" data-act="start">${state.started?'CONTINUAR':'EMPEZAR'}</button>`)}
+        </section>`;
+    }
+
+    function lastBlock(){
+      const r=state.lastResult;
+      if(!r || !state.started || state.day<=1) return '';
+      const net=r.materialGain-r.materialsUsed;
+      return `<div class="last-day"><div class="summary">+${fmt(r.giftsMade)} REGALOS · ${net>=0?'+':''}${fmt(net)} MAT.</div></div>`;
     }
 
     function renderDashboard(){
-      app.innerHTML = `
+      app.innerHTML=`
         <section class="screen">
           ${header()}
+          ${lastBlock()}
           <div class="section-title">ESTADO DEL DÍA</div>
           <h2 class="hero-number">${fmt(state.gifts)}</h2>
           <div class="hero-label">REGALOS FABRICADOS</div>
-          <div class="metric-line"></div>
-          <h2 class="hero-number">${fmt(state.materials)}</h2>
-          <div class="hero-label">MATERIALES</div>
-          <div class="metric-line"></div>
-          <p class="mid-strong">SANTA NVL. ${fmt(state.santaLevel)}</p>
-          <div class="metric-line"></div>
-          <div class="section-title" style="margin-bottom:2px">EQUIPO</div>
-          <div class="rows">
-            <div class="row">Santa Claus <span class="muted">· NVL. ${fmt(state.santaLevel)}</span></div>
-            <div class="row">Duendes fabricantes <span class="muted">· ${fmt(state.makerCount)} · NVL. ${fmt(state.makerLevel)}</span></div>
-            <div class="row">Duendes recolectores <span class="muted">· ${fmt(state.collectorCount)} · NVL. ${fmt(state.collectorLevel)}</span></div>
+          <div class="stat-row" aria-label="Recursos y equipo">
+            <div class="stat-cell">
+              <div class="stat-number">${fmt(state.materials)}</div>
+              <div class="stat-label">Materiales</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-number">${fmt(state.makerCount)}</div>
+              <div class="stat-label">Duendes fab.</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-number">${fmt(state.collectorCount)}</div>
+              <div class="stat-label">Duendes reco.</div>
+            </div>
           </div>
-          <div class="bottom-area">
-            <button class="pill" data-act="plan">PLANIFICAR DÍA</button>
-            <div class="script note">ritmo actual: ${fmt(currentPace())} regalos / día</div>
-          </div>
-        </section>
-      `;
+          ${footer(`<button class="pill" data-act="plan">PLANIFICAR DÍA</button><div class="script note">ritmo actual: ${fmt(currentPace())} regalos / día</div>`)}
+        </section>`;
     }
 
     function renderPlanning(){
-      const actions = availableActions(state);
-      if(!actions.some(a => a.id === selectedAction && !a.disabled)) selectedAction = firstAvailableAction(state);
-      const preview = previewDay(selectedAction);
-      const next = nextUnlockFor(state);
-      const makerDaily = state.makerCount * state.makerLevel;
-      const collectorDaily = state.collectorCount * state.collectorLevel * 5;
-      app.innerHTML = `
+      const actions=availableActions(state);
+      if(!actions.some(a=>a.id===selectedAction&&!a.disabled)) selectedAction=defaultAction(state);
+      const enabled=actions.filter(a=>!a.disabled);
+      const selected=actions.find(a=>a.id===selectedAction) || enabled[0] || actions[0];
+      const multi=enabled.length>1;
+      const preview=previewDay(selectedAction);
+      const reward=studyReward();
+      app.innerHTML=`
         <section class="screen">
           ${header()}
+          <div class="planning-meta">SANTA CLAUS · NVL. ${fmt(state.santaLevel)}</div>
           <div class="section-title">PLAN DEL DÍA</div>
-          <div class="script plan-subtitle">elige una acción para Santa</div>
-          <div class="group-heading">SANTA CLAUS · NVL. ${fmt(state.santaLevel)}</div>
-          <div class="action-list">
-            ${actions.map(a => `<button class="pill mini small-text ${selectedAction === a.id ? 'black' : ''} ${a.disabled ? 'disabled' : ''}" data-act="select" data-action="${a.id}">${a.label}</button>`).join('')}
+          ${multi ? `
+            <div class="dropdown ${dropdownOpen?'open':''}">
+              <button class="select-face" data-act="toggle" aria-expanded="${dropdownOpen}">
+                <span><span class="selected-label">${selected.label}</span></span><span class="chevron">⌄</span>
+              </button>
+              <div class="options">
+                ${actions.map(a=>`<button class="option ${selectedAction===a.id?'selected':''} ${a.disabled?'disabled':''}" data-act="choose" data-id="${a.id}">${a.label}</button>`).join('')}
+              </div>
+            </div>` : `
+            <div class="dropdown">
+              <div class="select-face static"><span><span class="selected-label">${selected.label}</span></span></div>
+            </div>`}
+          <div class="forecast-card">
+            <div class="title">Resultado</div>
+            <div class="big">+${fmt(preview.giftsMade)} regalos</div>
+            ${preview.netMaterials!==0 ? `<div class="small">${preview.netMaterials>0?'+':''}${fmt(preview.netMaterials)} materiales netos</div>` : ''}
+            ${selectedAction==='study' ? `<div class="small">+HABILIDAD: ${reward}</div>` : ''}
           </div>
-          ${next ? `<div class="forecast">próximo estudio: ${next.name}</div>` : `<div class="forecast">Santa ya domina todo el taller</div>`}
-          <div class="equipment">
-            <div class="group-heading">EQUIPO</div>
-            <div class="rows">
-              <div class="row">Duendes fabricantes · ${fmt(state.makerCount)} · NVL. ${fmt(state.makerLevel)} · +${fmt(makerDaily)} regalos / −${fmt(makerDaily)} mat.</div>
-              <div class="row">Duendes recolectores · ${fmt(state.collectorCount)} · NVL. ${fmt(state.collectorLevel)} · +${fmt(collectorDaily)} materiales</div>
-            </div>
-            <div class="forecast">previsión: +${fmt(preview.giftsMade)} regalos · ${preview.materialGain >= preview.materialsUsed ? '+' : ''}${fmt(preview.materialGain - preview.materialsUsed)} mat.</div>
-          </div>
-          <div class="bottom-area compact-bottom">
-            <button class="pill" data-act="finish">TERMINAR DÍA</button>
-            <div class="script note">los duendes trabajarán automáticamente</div>
-          </div>
-        </section>
-      `;
+          ${footer(`<button class="pill" data-act="finish">TERMINAR DÍA</button>`)}
+        </section>`;
     }
 
-    function renderSummary(){
-      const r = lastResult;
-      if(!r){ view = 'dashboard'; return render(); }
-      const notes = [];
-      if(r.santaMaterialGain) notes.push(`Santa recogió ${fmt(r.santaMaterialGain)} materiales.`);
-      if(r.collectorGain) notes.push(`Los recolectores trajeron ${fmt(r.collectorGain)} materiales.`);
-      if(r.santaMade) notes.push(`Santa fabricó ${fmt(r.santaMade)} regalos.`);
-      if(r.makersMade) notes.push(`Los fabricantes produjeron ${fmt(r.makersMade)} regalos.`);
-      if(r.limitedByMaterials) notes.push('La producción quedó limitada por los materiales disponibles.');
-      if(r.pending.length) notes.push(...r.pending.map(x => `${x}.`));
-      if(!notes.length) notes.push('El taller pasó el día reorganizando el trabajo.');
+    function resolveDay(){
+      if(!state.started || state.finished) return;
+      const actionId=selectedAction;
+      const startDay=state.day;
+      const startLevel=state.santaLevel;
+      const startMaterials=state.materials;
+      const startGifts=state.gifts;
+      let materialGain=state.collectorCount*state.collectorLevel*5;
+      let collectorGain=materialGain;
+      let santaMaterialGain=0;
+      let requestedGifts=state.makerCount*state.makerLevel;
+      let santaRequested=0;
+      const pending=[];
+      let unlocked=null;
 
-      app.innerHTML = `
+      if(actionId==='collect'){
+        santaMaterialGain=state.santaLevel*5;
+        materialGain+=santaMaterialGain;
+      }
+      if(actionId==='craft'){
+        santaRequested=state.santaLevel;
+        requestedGifts+=santaRequested;
+      }
+
+      const availableMaterials=startMaterials+materialGain;
+      const giftsMade=Math.min(requestedGifts,availableMaterials);
+      const materialsUsed=giftsMade;
+      const santaMade=Math.min(santaRequested,giftsMade);
+      const makersMade=giftsMade-santaMade;
+
+      state.materials=availableMaterials-materialsUsed;
+      state.gifts+=giftsMade;
+
+      if(actionId==='study'){
+        state.santaLevel++;
+        unlocked=unlocks[state.santaLevel] || null;
+      }
+      if(actionId==='hireMaker'){
+        state.makerCount++;
+        pending.push('Nuevo duende fabricante');
+      }
+      if(actionId==='hireCollector'){
+        state.collectorCount++;
+        pending.push('Nuevo duende recolector');
+      }
+      if(actionId==='trainMakers' && state.makerCount>0){
+        state.makerLevel++;
+        pending.push(`Fabricantes suben a NVL. ${fmt(state.makerLevel)}`);
+      }
+      if(actionId==='trainCollectors' && state.collectorCount>0){
+        state.collectorLevel++;
+        pending.push(`Recolectores suben a NVL. ${fmt(state.collectorLevel)}`);
+      }
+
+      state.lastResult={
+        startDay,
+        actionId,
+        startSantaLevel:startLevel,
+        newSantaLevel:state.santaLevel,
+        startMaterials,
+        endMaterials:state.materials,
+        startGifts,
+        endGifts:state.gifts,
+        materialGain,
+        collectorGain,
+        santaMaterialGain,
+        materialsUsed,
+        giftsMade,
+        requestedGifts,
+        santaMade,
+        makersMade,
+        limitedByMaterials:requestedGifts>giftsMade,
+        pending,
+        unlocked
+      };
+      state.lastAction=actionId;
+
+      if(state.gifts>=TARGET){
+        state.finished={won:true,day:startDay};
+        save();
+        view='final';
+        render();
+        return;
+      }
+      if(startDay>=MAX_DAYS){
+        state.finished={won:false,day:startDay};
+        save();
+        view='final';
+        render();
+        return;
+      }
+
+      state.day=startDay+1;
+      selectedAction=defaultAction(state);
+      dropdownOpen=false;
+      save();
+      view=(actionId==='study' && state.santaLevel>startLevel) ? 'level' : 'dashboard';
+      render();
+    }
+
+    function confetti(){
+      let html='';
+      for(let i=0;i<42;i++){
+        const x=Math.round(Math.random()*100);
+        const dx=Math.round((Math.random()-.5)*130)+'px';
+        const w=4+Math.round(Math.random()*8);
+        const h=6+Math.round(Math.random()*14);
+        const d=(1.1+Math.random()*1.4).toFixed(2)+'s';
+        const delay=(Math.random()*0.38).toFixed(2)+'s';
+        const o=(.45+Math.random()*.45).toFixed(2);
+        html+=`<i style="--x:${x}%;--dx:${dx};--w:${w}px;--h:${h}px;--d:${d};--delay:${delay};--o:${o}"></i>`;
+      }
+      return html;
+    }
+    function renderLevel(){
+      const r=state.lastResult;
+      if(!r){ view='dashboard'; render(); return; }
+      const ability=r.unlocked || 'MÁS POTENCIA';
+      app.innerHTML=`
         <section class="screen">
           ${header()}
-          <div class="section-title">DÍA ${fmt(r.startDay)} COMPLETADO</div>
-          <div class="summary-grid">
-            <div class="summary-card"><div class="n">+${fmt(r.giftsMade)}</div><div class="l">regalos</div></div>
-            <div class="summary-card"><div class="n">${r.materialGain-r.materialsUsed >= 0 ? '+' : ''}${fmt(r.materialGain-r.materialsUsed)}</div><div class="l">materiales netos</div></div>
+          <div class="level-screen">
+            <div class="confetti">${confetti()}</div>
+            <div class="level-frame">
+              <span class="level-eyebrow">nuevo nivel</span>
+              <span class="level-number" id="levelNumber" data-from="${r.startSantaLevel}" data-to="${r.newSantaLevel}">${fmt(r.startSantaLevel)}</span>
+            </div>
+            <div class="ability-card">
+              <div class="eyebrow">${r.unlocked?'nueva habilidad':'mejora'}</div>
+              <div class="name">${ability}</div>
+            </div>
           </div>
-          <div class="summary-grid">
-            <div class="summary-card"><div class="n">+${fmt(r.materialGain)}</div><div class="l">materiales recogidos</div></div>
-            <div class="summary-card"><div class="n">−${fmt(r.materialsUsed)}</div><div class="l">materiales usados</div></div>
-          </div>
-          <div class="log-box">${notes.slice(0,5).map(n => `<p>${n}</p>`).join('')}</div>
-          ${r.unlock ? `<div class="unlock"><div class="eyebrow">nueva acción</div><div class="name">${r.unlock}</div></div>` : ''}
-          <div class="bottom-area">
-            <button class="pill" data-act="next">SIGUIENTE DÍA</button>
-            <div class="script note">${state.day <= MAX_DAYS ? `día ${fmt(state.day)} espera` : 'último día completado'}</div>
-          </div>
-        </section>
-      `;
+          ${footer(`<button class="pill" data-act="levelDone">CONTINUAR</button>`)}
+        </section>`;
+      animateLevelNumber();
+    }
+    function animateLevelNumber(){
+      const el=document.getElementById('levelNumber');
+      if(!el) return;
+      const from=Number(el.dataset.from),to=Number(el.dataset.to),start=performance.now(),duration=720;
+      function tick(now){
+        const p=Math.min(1,(now-start)/duration);
+        const eased=1-Math.pow(1-p,3);
+        el.textContent=fmt(Math.round(from+(to-from)*eased));
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }
 
     function renderFinal(){
-      const won = finalResult && finalResult.won;
-      const missing = Math.max(0, TARGET - state.gifts);
-      app.innerHTML = `
+      const won=!!state.finished?.won;
+      const day=state.finished?.day || state.day;
+      const missing=Math.max(0,TARGET-state.gifts);
+      app.innerHTML=`
         <section class="screen">
-          <div class="game-head"><div>DÍA ${fmt(Math.min(finalResult?.day || state.day, MAX_DAYS))} / ${MAX_DAYS}</div><div class="right">OPERACIÓN NAVIDAD</div></div>
-          <div class="thick-line"></div>
-          <div class="title-spacer"></div>
+          <div class="head"><div>DÍA ${fmt(Math.min(day,MAX_DAYS))} / ${MAX_DAYS}</div><div class="right">REGALOS ${fmt(state.gifts)} / ${fmt(TARGET)}</div></div>
+          <div class="top-rule"></div>
+          <div class="spacer"></div>
           <div class="section-title">RESULTADO</div>
-          <h1 class="title-big">${won ? 'NAVIDAD' : 'FALTAN'}</h1>
-          <div class="title-word">${won ? 'SALVADA' : fmt(missing)}</div>
-          <div class="script note">${won ? 'todos tienen su regalo' : 'regalos por fabricar'}</div>
-          <p class="final-copy">
-            ${won ? `Has fabricado ${fmt(state.gifts)} regalos en ${fmt(finalResult.day)} días.` : `Has terminado con ${fmt(state.gifts)} regalos de ${fmt(TARGET)}.`}<br>
-            Santa NVL. ${fmt(state.santaLevel)} · Fabricantes ${fmt(state.makerCount)} NVL. ${fmt(state.makerLevel)} · Recolectores ${fmt(state.collectorCount)} NVL. ${fmt(state.collectorLevel)}.
-          </p>
-          <div class="title-spacer"></div>
-          <div class="bottom-area">
-            <button class="pill" data-act="resetNoConfirm">JUGAR OTRA VEZ</button>
-          </div>
-        </section>
-      `;
+          <h1 class="big-word">${won?'NAVIDAD':'FALTAN'}</h1>
+          <div class="hero-word">${won?'SALVADA':fmt(missing)}</div>
+          <div class="script note">${won?'todos tienen su regalo':'regalos por fabricar'}</div>
+          <p class="final-text">${won?`Has fabricado ${fmt(state.gifts)} regalos en ${fmt(day)} días.`:`Has terminado con ${fmt(state.gifts)} regalos de ${fmt(TARGET)}.`}</p>
+          <div class="spacer"></div>
+          ${footer(`<button class="pill" data-act="resetNoConfirm">JUGAR OTRA VEZ</button>`)}
+        </section>`;
     }
 
+    function reset(confirmIt=true){
+      if(confirmIt && !confirm('¿Reiniciar la partida?')) return;
+      state=fresh();
+      localStorage.removeItem(KEY);
+      selectedAction=defaultAction(state);
+      dropdownOpen=false;
+      view='title';
+      render();
+    }
     function render(){
-      if(view === 'title') renderTitle();
-      if(view === 'dashboard') renderDashboard();
-      if(view === 'planning') renderPlanning();
-      if(view === 'summary') renderSummary();
-      if(view === 'final') renderFinal();
+      if(view==='title') return renderTitle();
+      if(view==='dashboard') return renderDashboard();
+      if(view==='planning') return renderPlanning();
+      if(view==='level') return renderLevel();
+      if(view==='final') return renderFinal();
     }
 
-    app.addEventListener('click', (ev) => {
-      const btn = ev.target.closest('[data-act]');
+    app.addEventListener('click',ev=>{
+      const btn=ev.target.closest('[data-act]');
       if(!btn) return;
-      const act = btn.dataset.act;
-      if(act === 'start') startGame();
-      if(act === 'reset') hardReset();
-      if(act === 'resetNoConfirm'){
-        localStorage.removeItem(SAVE_KEY);
-        state = freshState();
-        selectedAction = firstAvailableAction(state);
-        lastResult = null;
-        finalResult = null;
-        view = 'title';
+      const act=btn.dataset.act;
+      if(act==='start'){
+        state.started=true;
+        state.finished=null;
+        selectedAction=defaultAction(state);
+        dropdownOpen=false;
+        save();
+        view='dashboard';
         render();
       }
-      if(act === 'plan'){
-        selectedAction = firstAvailableAction(state);
-        view = 'planning';
+      if(act==='reset') reset(true);
+      if(act==='resetNoConfirm') reset(false);
+      if(act==='plan'){
+        selectedAction=defaultAction(state);
+        dropdownOpen=false;
+        view='planning';
         render();
       }
-      if(act === 'select'){
-        selectedAction = btn.dataset.action;
+      if(act==='toggle'){
+        dropdownOpen=!dropdownOpen;
         renderPlanning();
       }
-      if(act === 'finish') resolveDay();
-      if(act === 'next'){
-        view = 'dashboard';
+      if(act==='choose'){
+        if(btn.classList.contains('disabled')) return;
+        selectedAction=btn.dataset.id;
+        dropdownOpen=false;
+        renderPlanning();
+      }
+      if(act==='finish') resolveDay();
+      if(act==='levelDone'){
+        view='dashboard';
         render();
+      }
+    });
+    document.addEventListener('click',ev=>{
+      if(dropdownOpen && !ev.target.closest('.dropdown')){
+        dropdownOpen=false;
+        if(view==='planning') renderPlanning();
       }
     });
 
